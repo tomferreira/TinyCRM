@@ -68,15 +68,8 @@ namespace TinyCRM.Application.Services
 
             var person = new LegalPerson(model.CompanyName, model.TradeName, model.IdDocument)
             {
-                Address = new Address()
-                {
-                    ZipCode = model.ZipCode,
-                    Country = model.Country,
-                    State = model.State,
-                    City = model.City,
-                    AddressLine1 = model.AddressLine1,
-                    AddressLine2 = model.AddressLine2
-                }
+                Address = new Address(
+                    model.Country, model.State, model.City, model.ZipCode, model.AddressLine1, model.AddressLine2)
             };
 
             _personRepository.Add(person);
@@ -94,14 +87,25 @@ namespace TinyCRM.Application.Services
             person.CompanyName = model.CompanyName;
             person.TradeName = model.TradeName;
             person.SetIdDocument(model.IdDocument);
-            
-            // Address attributes
-            person.Address.ZipCode = model.ZipCode;
-            person.Address.Country = model.Country;
-            person.Address.State = model.State;
-            person.Address.City = model.City;
-            person.Address.AddressLine1 = model.AddressLine1;
-            person.Address.AddressLine2 = model.AddressLine2;
+
+            // Address is optional, if country not informed delete address entity
+            if (!string.IsNullOrWhiteSpace(model.Country))
+            {
+                if (person.Address == null)
+                {
+                    person.Address = new Address(
+                        model.Country, model.State, model.City, model.ZipCode, model.AddressLine1, model.AddressLine2);
+                }
+                else
+                {
+                    person.Address.ChangeAddress(
+                        model.Country, model.State, model.City, model.ZipCode, model.AddressLine1, model.AddressLine2);
+                }
+            }
+            else
+            {
+                person.Address = null;
+            }
 
             _personRepository.Update(person);
 

@@ -31,12 +31,12 @@ namespace TinyCRM.Application.Services
                     Gender = person.Gender,
                     Email = person.Email,
                     IdDocument = person.IdDocument,
-                    ZipCode = person.Address.ZipCode,
-                    Country = person.Address.Country,
-                    State = person.Address.State,
-                    City = person.Address.City,
-                    AddressLine1 = person.Address.AddressLine1,
-                    AddressLine2 = person.Address.AddressLine2
+                    ZipCode = person.Address?.ZipCode,
+                    Country = person.Address?.Country,
+                    State = person.Address?.State,
+                    City = person.Address?.City,
+                    AddressLine1 = person.Address?.AddressLine1,
+                    AddressLine2 = person.Address?.AddressLine2
                 })
             };
         }
@@ -56,12 +56,12 @@ namespace TinyCRM.Application.Services
                 Gender = person.Gender,
                 Email = person.Email,
                 IdDocument = person.IdDocument,
-                ZipCode = person.Address.ZipCode,
-                Country = person.Address.Country,
-                State = person.Address.State,
-                City = person.Address.City,
-                AddressLine1 = person.Address.AddressLine1,
-                AddressLine2 = person.Address.AddressLine2
+                ZipCode = person.Address?.ZipCode,
+                Country = person.Address?.Country,
+                State = person.Address?.State,
+                City = person.Address?.City,
+                AddressLine1 = person.Address?.AddressLine1,
+                AddressLine2 = person.Address?.AddressLine2
             };
         }
 
@@ -76,15 +76,8 @@ namespace TinyCRM.Application.Services
             var person = new NaturalPerson(
                 model.Name, model.IdDocument, model.Birthday, model.Gender.Value, model.Email)
             {
-                Address = new Address()
-                {
-                    ZipCode = model.ZipCode,
-                    Country = model.Country,
-                    State = model.State,
-                    City = model.City,
-                    AddressLine1 = model.AddressLine1,
-                    AddressLine2 = model.AddressLine2
-                }
+                Address = new Address(
+                    model.Country, model.State, model.City, model.ZipCode, model.AddressLine1, model.AddressLine2)
             };
 
             _personRepository.Add(person);
@@ -104,14 +97,25 @@ namespace TinyCRM.Application.Services
             person.Email = model.Email;
             person.SetBirthday(model.Birthday);
             person.SetIdDocument(model.IdDocument);
-            
-            // Address attributes
-            person.Address.ZipCode = model.ZipCode;
-            person.Address.Country = model.Country;
-            person.Address.State = model.State;
-            person.Address.City = model.City;
-            person.Address.AddressLine1 = model.AddressLine1;
-            person.Address.AddressLine2 = model.AddressLine2;
+
+            // Address is optional, if country not informed delete address entity
+            if (!string.IsNullOrWhiteSpace(model.Country))
+            { 
+                if (person.Address == null)
+                {
+                    person.Address = new Address(
+                        model.Country, model.State, model.City, model.ZipCode, model.AddressLine1, model.AddressLine2);
+                }
+                else
+                {
+                    person.Address.ChangeAddress(
+                        model.Country, model.State, model.City, model.ZipCode, model.AddressLine1, model.AddressLine2);
+                }
+            }
+            else
+            {
+                person.Address = null;
+            }
 
             _personRepository.Update(person);
 
