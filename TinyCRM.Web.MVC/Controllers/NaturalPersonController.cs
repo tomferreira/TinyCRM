@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using TinyCRM.Domain.Exceptions;
 namespace TinyCRM.Web.MVC.Controllers
 {
     [Route("[controller]/[action]")]
+    [Authorize]
     public class NaturalPersonController : Controller
     {
         private INaturalPersonService _personService;

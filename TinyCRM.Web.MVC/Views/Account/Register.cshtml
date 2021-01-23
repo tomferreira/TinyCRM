@@ -1,0 +1,51 @@
+﻿@model TinyCRM.Application.ViewModels.Account.RegisterViewModel
+@{
+    ViewData["Title"] = "Register new user";
+}
+
+<section class="section">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                <div class="login-brand">TinyCRM</div>
+
+                <div class="card card-primary">
+                    <div class="card-header"><h4>Login</h4></div>
+                    <div class="card-body">
+                        <form method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <div class="d-block">
+                                    <label asp-for="UserName"></label>
+                                    <input asp-for="UserName" class="form-control" placeholder="UserName">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="d-block">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" type="email" placeholder="Email">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="d-block">
+                                    <label asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control" type="password" placeholder="Password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Register">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="mt-5 text-muted text-center">
+                    <a asp-action="Login">Log in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

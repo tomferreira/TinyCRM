@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using TinyCRM.Domain.Entities;
@@ -13,8 +14,22 @@ namespace TinyCRM.Infra.Data.Context
                 serviceProvider.GetRequiredService<DbContextOptions<AppDbContext>>()))
             {
                 // Exit if DB has been seeded
-                if (await context.NaturalPeople.AnyAsync())
+                if (await context.Users.AnyAsync())
                     return;
+
+                PasswordHasher<IdentityUser> hasher = new PasswordHasher<IdentityUser>();
+
+                var adminUser = new IdentityUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "admin",
+                    NormalizedUserName = "ADMIN",
+                    Email = "admin@admin.com",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Admin2021")
+                };
+
+                context.Users.Add(adminUser);
 
                 context.NaturalPeople.AddRange(
                     new NaturalPerson(
