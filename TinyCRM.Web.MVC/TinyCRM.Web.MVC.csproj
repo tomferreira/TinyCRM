@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TinyCRM.Infra.Data\TinyCRM.Infra.Data.csproj" />
+    <ProjectReference Include="..\TinyCRM.Infra.IoC\TinyCRM.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>

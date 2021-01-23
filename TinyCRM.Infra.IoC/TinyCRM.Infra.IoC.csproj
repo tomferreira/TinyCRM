@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TinyCRM.Application\TinyCRM.Application.csproj" />
+    <ProjectReference Include="..\TinyCRM.Infra.Data\TinyCRM.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>
