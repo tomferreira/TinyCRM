@@ -1,0 +1,17 @@
+﻿namespace TinyCRM.Domain.Entities
+{
+    public class Address
+    {
+        public int Id { get; private set; }
+        public string ZipCode { get; set; }
+        public string Country { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
+
+    }
+}
