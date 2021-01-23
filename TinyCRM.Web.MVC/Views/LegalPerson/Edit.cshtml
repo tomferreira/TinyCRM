@@ -1,0 +1,27 @@
+﻿@model TinyCRM.Application.ViewModels.LegalPerson.LegalPersonViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Edit Legal Person";
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Title"]</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="LegalPerson" asp-action="Index">Legal people</a></div>
+            <div class="breadcrumb-item active">Edit</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">General</h2>
+        <div class="card">
+            @await Html.PartialAsync("_Form.cshtml", Model)
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/zipcode.js"></script>
+}

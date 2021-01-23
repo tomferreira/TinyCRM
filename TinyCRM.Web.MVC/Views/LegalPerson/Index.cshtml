@@ -1,0 +1,54 @@
+﻿@model TinyCRM.Application.ViewModels.LegalPerson.ListLegalPersonViewModel
+
+@{
+    ViewData["Title"] = "All Legal People";
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Title"]</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
+            <div class="breadcrumb-item active">Legal people</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <div class="card">
+            <div class="card-header">
+                <h4>All Legal people</h4>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Trade Name</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Actions</th>
+                        </tr>
+
+                        @foreach (var person in Model.People)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Show", "LegalPerson",  new { id = person.Id })">@person.CompanyName</a>
+                                </td>
+                                <td>@person.TradeName</td>
+                                <td>@person.City</td>
+                                <td>@person.Country</td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "LegalPerson",  new { id = person.Id })" class="btn btn-secondary btn-action">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="float-right">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

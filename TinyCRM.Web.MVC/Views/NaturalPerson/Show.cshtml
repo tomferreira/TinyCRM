@@ -1,0 +1,73 @@
+﻿@model TinyCRM.Application.ViewModels.NaturalPerson.NaturalPersonViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Title"]</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="NaturalPerson" asp-action="Index">Natural people</a></div>
+            <div class="breadcrumb-item active">@Model.Name</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">General</h2>
+        <div class="card">
+            <div class="card-body">
+                <p>
+                    <strong><label asp-for="Name"></label></strong>
+                    <br />
+                    @Model.Name
+                </p>
+                <p>
+                    <strong><label asp-for="IdDocument"></label></strong>
+                    <br />
+                    @Model.IdDocument
+                </p>
+                <p>
+                    <strong><label asp-for="Birthday"></label></strong>
+                    <br />
+                    @Model.Birthday
+                </p>
+                <p>
+                    <strong><label asp-for="Country"></label></strong>
+                    <br />
+                    @Model.Country
+                </p>
+                <p>
+                    <strong><label asp-for="ZipCode"></label></strong>
+                    <br />
+                    @Model.ZipCode
+                </p>
+                <p>
+                    <strong><label asp-for="City"></label></strong>
+                    <br />
+                    @Model.City
+                </p>
+                <p>
+                    <strong><label asp-for="State"></label></strong>
+                    <br />
+                    @Model.State
+                </p>
+                <p>
+                    <strong><label asp-for="AddressLine1"></label></strong>
+                    <br />
+                    @Model.AddressLine1
+                </p>
+                <p>
+                    <strong><label asp-for="AddressLine2"></label></strong>
+                    <br />
+                    @Model.AddressLine2
+                </p>
+            </div>
+            <div class="card-footer text-right">
+                @Html.ActionLink("Edit", "Edit", "NaturalPerson", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "Edit", "NaturalPerson", new { id = Model.Id }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</section>
