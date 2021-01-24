@@ -10,6 +10,7 @@ namespace TinyCRM.Domain.Interfaces
         Task<NaturalPerson> GetAsync(int id);
         void Add(NaturalPerson person);
         void Update(NaturalPerson person);
+        void Delete(NaturalPerson person);
 
         bool IsIdDocumentUnique(string idDocument);
         bool IsEmailUnique(string email);

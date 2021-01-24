@@ -39,6 +39,11 @@ namespace TinyCRM.Infra.Data.Repositories
             _context.LegalPeople.Update(person);
         }
 
+        public void Delete(LegalPerson person)
+        {
+            _context.LegalPeople.Remove(person);
+        }
+
         public bool IsIdDocumentUnique(string idDocument)
         {
             int ammount = _context.LegalPeople

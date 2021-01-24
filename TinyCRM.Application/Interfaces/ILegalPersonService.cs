@@ -12,5 +12,7 @@ namespace TinyCRM.Application.Interfaces
         void Add(LegalPersonViewModel model);
 
         Task UpdateAsync(LegalPersonViewModel model);
+
+        Task DeleteAsync(int id);
     }
 }

@@ -123,5 +123,13 @@ namespace TinyCRM.Web.MVC.Controllers
 
             return View(model);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            await _personService.DeleteAsync(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

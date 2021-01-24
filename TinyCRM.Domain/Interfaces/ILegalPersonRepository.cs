@@ -10,6 +10,7 @@ namespace TinyCRM.Domain.Interfaces
         Task<LegalPerson> GetAsync(int id);
         void Add(LegalPerson person);
         void Update(LegalPerson person);
+        void Delete(LegalPerson person);
 
         bool IsIdDocumentUnique(string idDocument);
 

@@ -111,5 +111,17 @@ namespace TinyCRM.Application.Services
 
             _personRepository.SaveChanges();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var person = await _personRepository.GetAsync(id);
+
+            if (person == null)
+                return;
+
+            _personRepository.Delete(person);
+
+            _personRepository.SaveChanges();
+        }
     }
 }
