@@ -12,6 +12,7 @@ namespace TinyCRM.Infra.IoC
         {
             services.AddScoped<INaturalPersonService, NaturalPersonService>();
             services.AddScoped<ILegalPersonService, LegalPersonService>();
+            services.AddScoped<IAddressService, AddressService>();
 
             services.AddScoped<INaturalPersonRepository, NaturalPersonRepository>();
             services.AddScoped<ILegalPersonRepository, LegalPersonRepository>();

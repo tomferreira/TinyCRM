@@ -6,6 +6,10 @@ function clear_address_fields() {
 }
 
 $("#ZipCode").blur(function () {
+    // The zipcode autocomplete works only for Brazil
+    if ($("#Country").val() != "Brazil")
+        return;
+
     var zipcode = $(this).val().replace(/\D/g, '');
 
     if (zipcode == "") {

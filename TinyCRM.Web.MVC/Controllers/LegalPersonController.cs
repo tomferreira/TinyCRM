@@ -14,11 +14,15 @@ namespace TinyCRM.Web.MVC.Controllers
     public class LegalPersonController : Controller
     {
         private ILegalPersonService _personService;
+        private IAddressService _addressService;
         private readonly ILogger<LegalPersonController> _logger;
 
-        public LegalPersonController(ILegalPersonService personService, ILogger<LegalPersonController> logger)
+        public LegalPersonController(ILegalPersonService personService,
+            IAddressService addressService,
+            ILogger<LegalPersonController> logger)
         {
             _personService = personService;
+            _addressService = addressService;
             _logger = logger;
         }
 
@@ -47,6 +51,8 @@ namespace TinyCRM.Web.MVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.CountryList = _addressService.GetContriesName();
+
             return View();
         }
 
@@ -89,6 +95,8 @@ namespace TinyCRM.Web.MVC.Controllers
 
             if (model == null)
                 return NotFound();
+
+            ViewBag.CountryList = _addressService.GetContriesName();
 
             return View(model);
         }
