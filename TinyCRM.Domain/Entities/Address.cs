@@ -31,7 +31,7 @@ namespace TinyCRM.Domain.Entities
 
         private void CheckConsistency(string country, string state, string city, string zipCode, string addressLine1, string addressLine2)
         {
-            if (string.IsNullOrWhiteSpace(country) && state != null)
+            if (string.IsNullOrWhiteSpace(country))
                 throw new BusinessRuleException("Country", "Country must be informed");
 
             if (string.IsNullOrWhiteSpace(state) && city != null)

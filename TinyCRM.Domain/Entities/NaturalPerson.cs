@@ -13,6 +13,14 @@ namespace TinyCRM.Domain.Entities
             NotInformed
         };
 
+        public string Name { get; set; }
+
+        public DateTime Birthday { get; private set; }
+
+        public GenderType Gender { get; set; }
+
+        public string Email { get; set; }
+
         public NaturalPerson(string name, string idDocument, DateTime birthday, GenderType gender, string email)
         {
             Name = name;
@@ -23,17 +31,9 @@ namespace TinyCRM.Domain.Entities
             SetBirthday(birthday); 
         }
 
-        public string Name { get; set; }
-
-        public DateTime Birthday { get; private set; }
-
-        public GenderType Gender { get; set; }
-
-        public string Email { get; set; }
-
         public override void SetIdDocument(string value)
         {
-            if (!Cpf.Validate(value))
+            if (!Cpf.Validate(value, CpfPunctuation.Strict))
                 throw new BusinessRuleException("IdDocument", "CPF is invalid.");
 
             IdDocument = value;
