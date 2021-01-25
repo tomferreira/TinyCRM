@@ -9,13 +9,13 @@
     <div class="section-header">
         <h1>@ViewData["Title"]</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
-            <div class="breadcrumb-item"><a asp-area="" asp-controller="LegalPerson" asp-action="Index">Legal people</a></div>
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a></div>
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="LegalPerson" asp-action="Index">@SharedLocalizer["LegalPerson"]</a></div>
             <div class="breadcrumb-item active">@Model.CompanyName</div>
         </div>
     </div>
     <div class="section-body">
-        <h2 class="section-title">General</h2>
+        <h2 class="section-title">@SharedLocalizer["GeneralSection"]</h2>
         <div class="card">
             <div class="card-body">
                 <p>
@@ -65,9 +65,9 @@
                 </p>
             </div>
             <div class="card-footer text-right">
-                @Html.ActionLink("Edit", "Edit", "LegalPerson", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Delete", "Delete", "LegalPerson", new { id = Model.Id }, 
-                    new { @onclick = "return confirm('Are you sure you want to delete?')", @class = "btn btn-danger" })
+                @Html.ActionLink(@SharedLocalizer["EditAction"], "Edit", "LegalPerson", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink(@SharedLocalizer["DeleteAction"], "Delete", "LegalPerson", new { id = Model.Id },
+                    new { @onclick = $"return confirm('{@SharedLocalizer["DeleteConfirmation"]}')", @class = "btn btn-danger" })
             </div>
         </div>
     </div>

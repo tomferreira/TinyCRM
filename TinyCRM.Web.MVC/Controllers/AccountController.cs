@@ -1,7 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using TinyCRM.Application.ViewModels.Account;
+using TinyCRM.Web.MVC.Resources;
 
 namespace TinyCRM.Web.MVC.Controllers
 {
@@ -10,13 +17,21 @@ namespace TinyCRM.Web.MVC.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IOptions<RequestLocalizationOptions> _localizationOptions;
+        private readonly ISharedViewLocalizer _sharedLocalizer;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager, 
+            RoleManager<IdentityRole> roleManager,
+            IOptions<RequestLocalizationOptions> localizationOptions,
+            ISharedViewLocalizer sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _localizationOptions = localizationOptions;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         public IActionResult Login()
@@ -36,7 +51,7 @@ namespace TinyCRM.Web.MVC.Controllers
 
             if (data == null)
             {
-                ModelState.AddModelError("", "Username or Password is wrong!!");
+                ModelState.AddModelError(string.Empty, _sharedLocalizer["UsernameOrPasswordWrongMessage"]);
                 return View(model);
             }
 
@@ -44,7 +59,7 @@ namespace TinyCRM.Web.MVC.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "Username or Password is wrong!!");
+                ModelState.AddModelError(string.Empty, _sharedLocalizer["UsernameOrPasswordWrongMessage"]);
                 return View(model);
             }
 
@@ -82,6 +97,31 @@ namespace TinyCRM.Web.MVC.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            var cultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
+
+            var model = new ProfileViewModel();
+            model.SupportedCultures = _localizationOptions.Value.SupportedUICultures.ToList();
+            model.CurrentUICulture = cultureFeature.RequestCulture.UICulture;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Profile([FromForm] ProfileViewModel model)
+        {
+            // TODO: Persist the culture info
+
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(model.CurrentUICulture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+
+            return RedirectToAction(nameof(AccountController.Profile));
         }
     }
 }

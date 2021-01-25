@@ -1,3 +1,8 @@
 ﻿@using TinyCRM.Web.MVC
 @using TinyCRM.Web.MVC.Models
+@using TinyCRM.Web.MVC.Resources
+@using Microsoft.AspNetCore.Mvc.Localization
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject ISharedViewLocalizer SharedLocalizer
+@inject IViewLocalizer Localizer

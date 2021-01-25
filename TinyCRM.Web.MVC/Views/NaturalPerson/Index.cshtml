@@ -1,32 +1,31 @@
 ﻿@model TinyCRM.Application.ViewModels.NaturalPerson.ListNaturalPersonViewModel
 
 @{
-    ViewData["Title"] = "All Natural People";
+    ViewData["Title"] = Localizer["ViewTitle"];
 }
 
 <section class="section">
     <div class="section-header">
-        <h1>@ViewData["Title"]</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
-            <div class="breadcrumb-item active">Natural people</div>
+            <div class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a></div>
+            <div class="breadcrumb-item active">@SharedLocalizer["NaturalPerson"]</div>
         </div>
     </div>
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <h4>All Natural people</h4>
+                <h4>@Localizer["ViewTitle"]</h4>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
-                            <th>Name</th>
-                            <th>Birthday</th>
-                            <th>Gender</th>
-                            <th>City</th>
-                            <th>Country</th>
-                            <th>Actions</th>
+                            <th>@SharedLocalizer["NaturalPerson.Name"]</th>
+                            <th>@SharedLocalizer["NaturalPerson.Birthday"]</th>
+                            <th>@SharedLocalizer["NaturalPerson.Gender"]</th>
+                            <th>@SharedLocalizer["Address.City"]</th>
+                            <th>@SharedLocalizer["Address.Country"]</th>
+                            <th>@SharedLocalizer["Actions"]</th>
                         </tr>
 
                         @foreach (var person in Model.People)

@@ -37,7 +37,7 @@
             <label asp-for="Gender" class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">
                 <select asp-for="Gender" asp-items="Html.GetEnumSelectList<TinyCRM.Domain.Entities.NaturalPerson.GenderType>()" class="form-control select2">
-                    <option value="">-- Not specified --</option>
+                    <option value="">-- @SharedLocalizer["NotSpecified"] --</option>
                 </select>
                 <span asp-validation-for="Gender"></span>
             </div>
@@ -55,7 +55,7 @@
             <label asp-for="Country" class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">
                 <select asp-for="Country" asp-items="@(new SelectList(ViewBag.CountryList))" class="form-control select2">
-                    <option value="">-- Not specified --</option>
+                    <option value="">-- @SharedLocalizer["NotSpecified"] --</option>
                 </select>
                 <span asp-validation-for="Country"></span>
             </div>
@@ -104,7 +104,7 @@
     </div>
 
     <div class="card-footer text-right">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a class="btn btn-link" asp-area="" asp-controller="NaturalPerson" asp-action="Index">Cancel</a>
+        <button type="submit" class="btn btn-primary">@SharedLocalizer["SaveAction"]</button>
+        <a class="btn btn-link" asp-area="" asp-controller="NaturalPerson" asp-action="Index">@SharedLocalizer["CancelAction"]</a>
     </div>
 </form>

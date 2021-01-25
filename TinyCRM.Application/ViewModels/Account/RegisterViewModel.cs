@@ -4,13 +4,16 @@ namespace TinyCRM.Application.ViewModels.Account
 {
     public class RegisterViewModel
     {
-        [Required, StringLength(80)]
+        [Display(Name = "UserName")]
+        [Required(ErrorMessage = "{0} is required"), StringLength(80)]
         public string UserName { get; set; }
 
-        [Required, EmailAddress]
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "{0} is required"), EmailAddress]
         public string Email { get; set; }
 
-        [Required, DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "{0} is required"), DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

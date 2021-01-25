@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TinyCRM.Application.Interfaces;
 using TinyCRM.Application.ViewModels.LegalPerson;
 using TinyCRM.Domain.Exceptions;
+using TinyCRM.Web.MVC.Resources;
 
 namespace TinyCRM.Web.MVC.Controllers
 {
@@ -15,14 +16,19 @@ namespace TinyCRM.Web.MVC.Controllers
     {
         private ILegalPersonService _personService;
         private IAddressService _addressService;
+        private ISharedViewLocalizer _sharedLocalizer;
         private readonly ILogger<LegalPersonController> _logger;
 
-        public LegalPersonController(ILegalPersonService personService,
+        public LegalPersonController(
+            ILegalPersonService personService,
             IAddressService addressService,
+            ISharedViewLocalizer sharedLocalizer,
             ILogger<LegalPersonController> logger)
         {
             _personService = personService;
             _addressService = addressService;
+
+            _sharedLocalizer = sharedLocalizer;
             _logger = logger;
         }
 
@@ -77,8 +83,7 @@ namespace TinyCRM.Web.MVC.Controllers
             {
                 _logger.LogError(ex.Message);
 
-                ModelState.AddModelError(string.Empty,
-                    "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
+                ModelState.AddModelError(string.Empty, _sharedLocalizer["GenericErrorMessage"]);
             }
 
             return View(model);
@@ -101,7 +106,7 @@ namespace TinyCRM.Web.MVC.Controllers
             return View(model);
         }
 
-        // PUT: /LegalPerson/Edit/5
+        // POST: /LegalPerson/Edit/5
         [HttpPost("{id:int}")]
         public async Task<ActionResult> Edit(int id, [FromForm] LegalPersonViewModel model)
         {
@@ -125,8 +130,7 @@ namespace TinyCRM.Web.MVC.Controllers
             {
                 _logger.LogError(ex.Message);
 
-                ModelState.AddModelError(string.Empty,
-                    "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
+                ModelState.AddModelError(string.Empty, _sharedLocalizer["GenericErrorMessage"]);
             }
 
             return View(model);

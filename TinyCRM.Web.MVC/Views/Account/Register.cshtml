@@ -1,6 +1,7 @@
 ﻿@model TinyCRM.Application.ViewModels.Account.RegisterViewModel
+
 @{
-    ViewData["Title"] = "Register new user";
+    ViewData["Title"] = Localizer["ViewTitle"];
 }
 
 <section class="section">
@@ -10,7 +11,7 @@
                 <div class="login-brand">TinyCRM</div>
 
                 <div class="card card-primary">
-                    <div class="card-header"><h4>Login</h4></div>
+                    <div class="card-header"><h4>@Localizer["RegisterTitle"]</h4></div>
                     <div class="card-body">
                         <form method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -37,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Register">
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="@Localizer["RegisterSubmit"]">
                             </div>
                         </form>
                     </div>
