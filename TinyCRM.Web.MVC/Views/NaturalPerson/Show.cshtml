@@ -30,7 +30,7 @@
                 <p>
                     <strong><label asp-for="Birthday"></label></strong>
                     <br />
-                    @Model.Birthday
+                    @Model.Birthday.ToShortDateString()
                 </p>
                 <p>
                     <strong><label asp-for="Country"></label></strong>

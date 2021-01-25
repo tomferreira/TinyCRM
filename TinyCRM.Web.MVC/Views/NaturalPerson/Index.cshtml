@@ -34,7 +34,7 @@
                                 <td>
                                     <a href="@Url.Action("Show", "NaturalPerson",  new { id = person.Id })">@person.Name</a>
                                 </td>
-                                <td>@person.Birthday</td>
+                                <td>@person.Birthday.ToShortDateString()</td>
                                 <td>@person.Gender</td>
                                 <td>@person.City</td>
                                 <td>@person.Country</td>
