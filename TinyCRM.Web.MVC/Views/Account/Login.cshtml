@@ -16,9 +16,11 @@
                         <form method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="UserName"></label>
-                                <input asp-for="UserName" class="form-control">
-                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                <div class="d-block">
+                                    <label asp-for="UserName"></label>
+                                    <input asp-for="UserName" class="form-control">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
                             </div>
 
                             <div class="form-group">
