@@ -41,7 +41,10 @@ namespace TinyCRM.Web.MVC
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
             services
-                .AddControllersWithViews()
+                .AddControllersWithViews(options =>
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                })
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization(options =>
                 {
