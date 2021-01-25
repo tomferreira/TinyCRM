@@ -210,6 +210,12 @@
   <data name="NotSpecified" xml:space="preserve">
     <value>Not specified</value>
   </data>
+  <data name="PasswdConfirmationDifferentMessage" xml:space="preserve">
+    <value>Password Confirmation must be equal</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Password Confirmation</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>

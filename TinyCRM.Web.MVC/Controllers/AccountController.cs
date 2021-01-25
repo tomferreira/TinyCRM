@@ -85,6 +85,12 @@ namespace TinyCRM.Web.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.Password != model.PasswordConfirmation)
+                {
+                    ModelState.AddModelError("PasswordConfirmation", _sharedLocalizer["PasswdConfirmationDifferentMessage"]);
+                    return View(model);
+                }
+
                 IdentityUser user = new IdentityUser { UserName = model.UserName, Email = model.Email };
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 

@@ -15,5 +15,9 @@ namespace TinyCRM.Application.ViewModels.Account
         [Display(Name = "Password")]
         [Required(ErrorMessage = "{0} is required"), DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Display(Name = "PasswordConfirmation")]
+        [Required(ErrorMessage = "{0} is required"), DataType(DataType.Password)]
+        public string PasswordConfirmation { get; set; }
     }
 }

@@ -213,8 +213,14 @@
   <data name="NotSpecified" xml:space="preserve">
     <value>Não informado</value>
   </data>
+  <data name="PasswdConfirmationDifferentMessage" xml:space="preserve">
+    <value>Confirmação de senha deve ser igual</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Senha</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Confirmação de senha</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Perfil</value>
