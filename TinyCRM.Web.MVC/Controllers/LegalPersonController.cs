@@ -86,6 +86,8 @@ namespace TinyCRM.Web.MVC.Controllers
                 ModelState.AddModelError(string.Empty, _sharedLocalizer["GenericErrorMessage"]);
             }
 
+            ViewBag.CountryList = _addressService.GetContriesName();
+
             return View(model);
         }
 
@@ -132,6 +134,8 @@ namespace TinyCRM.Web.MVC.Controllers
 
                 ModelState.AddModelError(string.Empty, _sharedLocalizer["GenericErrorMessage"]);
             }
+
+            ViewBag.CountryList = _addressService.GetContriesName();
 
             return View(model);
         }
